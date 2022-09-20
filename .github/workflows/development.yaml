@@ -23,4 +23,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: ghcr.io/frontenac-technolofy-services/tnsr-controller:latest,ghcr.io/frontenac-technolofy-services/tnsr-controller:dev-${GITHUB_SHA::6}
+          tags: ghcr.io/frontenac-technology-services/tnsr-controller:latest,ghcr.io/frontenac-technology-services/tnsr-controller:dev-${GITHUB_SHA::6}
