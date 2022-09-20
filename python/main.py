@@ -2,6 +2,7 @@ from http.server import BaseHTTPRequestHandler, HTTPServer
 import json
 import requests
 import os
+import base64
 
 # Define a superglobal list of ACLs as objects as caught by the decorator controller
 known_acls = list()
@@ -112,15 +113,15 @@ server = os.environ.get('SERVER')
 user = os.environ.get('REMOTE_USER')
 
 f = open("ca", "w")
-f.write(os.environ.get('CA'))
+f.write(base64.b64decode(os.environ.get('CA')).decode("ascii"))
 f.close()
 
 f = open("cert", "w")
-f.write(os.environ.get('CERT'))
+f.write(base64.b64decode(os.environ.get('CERT')).decode("ascii"))
 f.close()
 
 f = open("private_key", "w")
-f.write(os.environ.get('PRIVATE_KEY'))
+f.write(base64.b64decode(os.environ.get('PRIVATE_KEY')).decode("ascii"))
 f.close()
 
 # Start controller
