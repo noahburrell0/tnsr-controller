@@ -17,12 +17,13 @@ spec:
       status: {}
     schema:
       openAPIV3Schema:
-        description: tnsrNAT is a strictly informational CRD to convey the status of NAT/ACL rule creation and information in relation to
-          the service resource which spawned the rules.
+        description: tnsrNAT is a definition used by the tnsr-controller to establish the configuration options for tnsr ACLs and NAT rules that need
+        to be created to allow external (Internet) access to a service. This resource should generally only be spawned by a service
+        using the tnsr.frontenac.tech/tnsrACL annotation.
         type: object
         properties:
           spec:
-            description: tnsrNAT.spec represents the desired state for the NAT rule which is to be applied in tnsr. This doesnt actually do anything
+            description: tnsrNAT.spec represents the desired state for the NAT rule (and associated ACL rule) which is to be applied in tnsr.
             type: object
             properties:
               externalPort:
@@ -38,7 +39,8 @@ spec:
               tnsrACL:
                 type: string
           status:
-            description: tnsrNAT.status outlines the status of the generated NAT and ACL rules in TNSR
+            description: tnsrNAT.status outlines the status of the generated NAT and ACL rules in TNSR. This will give basic information about
+            the creation status of the ACL and NAT rules.
             type: object
             properties:
               nat_created:
