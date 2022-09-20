@@ -1,0 +1,26 @@
+name: Create Development Build
+on: [push, workflow_dispatch]
+jobs:
+  build-publish-image:
+    name: Build and Publish Image
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      packages: write
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v3
+
+      - name: Login to DockerHub
+        uses: docker/login-action@v2
+        with:
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
+
+      - name: Docker Build and Push
+        uses: docker/build-push-action@v3
+        with:
+          context: .
+          push: true
+          tags: ghcr.io/frontenac-technolofy-services/tnsr-controller:latest,ghcr.io/frontenac-technolofy-services/tnsr-controller:dev-${GITHUB_SHA::6}
