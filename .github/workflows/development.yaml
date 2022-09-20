@@ -23,4 +23,4 @@ jobs:
         with:
           context: .
           push: true
-          tags: frontenac-technology-services/tnsr-controller:latest,frontenac-technology-services/tnsr-controller:dev-${{ github.sha }}
+          tags: ghcr.io/frontenac-technology-services/tnsr-controller:latest,ghcr.io/frontenac-technology-services/tnsr-controller:dev-${{ github.sha }}
