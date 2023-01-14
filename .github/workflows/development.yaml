@@ -12,13 +12,13 @@ jobs:
       - name: Login to registry
         uses: docker/login-action@v2
         with:
-          registry: registry.frontenac.tech
-          username: ${{ secrets.REGISTRY_USERNAME }}
-          password: ${{ secrets.REGISTRY_PASSWORD }}
+          registry: ghcr.io
+          username: ${{ github.actor }}
+          password: ${{ secrets.GITHUB_TOKEN }}
 
       - name: Docker Build and Push
         uses: docker/build-push-action@v3
         with:
           context: .
           push: true
-          tags: registry.frontenac.tech/fts/tnsr-controller:latest,registry.frontenac.tech/fts/tnsr-controller:dev-${{ github.sha }}
+          tags: ghcr.io/noahburrell0/tnsr-controller:latest,ghcr.io/noahburrell0/tnsr-controller:dev-${{ github.sha }}
