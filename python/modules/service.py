@@ -10,7 +10,7 @@ def service_sync(self, request, known_acls):
     # Verify there is a matching tnsrACL and fetch it
     tnsracl_object = None
     for i in known_acls:
-        if request["object"]["metadata"]["annotations"]["tnsr.frontenac.tech/tnsrACL"] == i["metadata"]["name"]:
+        if request["object"]["metadata"]["annotations"]["tnsr.burrell.tech/tnsrACL"] == i["metadata"]["name"]:
             tnsracl_object = i
             break
 
@@ -25,7 +25,7 @@ def service_sync(self, request, known_acls):
         index = 0
         for i in request["object"]["spec"]["ports"]:
             attachment = {
-                "apiVersion": "frontenac.tech/v1",
+                "apiVersion": "burrell.tech/v1",
                 "kind": "tnsrNAT",
                 "metadata": {
                     "name": request["object"]["metadata"]["name"]+"-"+str(index)
@@ -36,7 +36,7 @@ def service_sync(self, request, known_acls):
                     "natInt": tnsracl_object["spec"]["interface"],
                     "localIP": request["object"]["status"]["loadBalancer"]["ingress"][0]["ip"],
                     "protocol": i["protocol"].lower(),
-                    "tnsrACL": request["object"]["metadata"]["annotations"]["tnsr.frontenac.tech/tnsrACL"]
+                    "tnsrACL": request["object"]["metadata"]["annotations"]["tnsr.burrell.tech/tnsrACL"]
                 }
             }
             attachments.append(attachment)
